@@ -108,4 +108,204 @@
     .input-bar input {
       flex: 1;
       background: #090909;
+      border: 1px solid var(--gold-glow);
+      border-radius: 14px;
+      padding: 15px 18px;
+      color: var(--text);
+      font-size: 16px;
+    }
+
+    .input-bar button {
+      background: linear-gradient(180deg, #e6c873, #caa14c);
+      border: none;
+      border-radius: 14px;
+      padding: 0 26px;
+      font-size: 18px;
+      cursor: pointer;
+      color: #000;
+    }
+
+    footer {
+      margin-top: 14px;
+      font-size: 12px;
+      color: #777;
+    }
+  </style>
+</head>
+
+<body>
+  <aside class="sidebar">
+    <h2>ATHENA</h2>
+    <div class="nav-item">Browse</div>
+    <div class="nav-item">Secure</div>
+    <div class="nav-item">Title Insights</div>
+    <div class="nav-item">Risk Analysis</div>
+    <div class="nav-item">Reports</div>
+  </aside>
+
+  <main class="main">
+    <div class="brand">🦉 ATHENA</div>
+    <div class="subtitle">Secure, focused intelligence for title insurance clarity.</div>
+
+    <section class="chat" id="chat">
+      <div class="message bot">
+Consult a legal professional for legal decision‑making.
+
+Hello, I’m AthenaAI.
+What insight can I provide regarding title insurance, risk, or coverage?
+      </div>
+    </section>
+
+    <div class="input-bar">
+      <input id="input" placeholder="Enter a question…" />
+      <button onclick="send()">→</button>
+    </div>
+
+    <footer>
+      Prototype demonstration only. Not legal advice.
+    </footer>
+  </main>
+
+<script>
+const chat = document.getElementById('chat');
+const input = document.getElementById('input');
+
+const DISCLAIMER =
+"Consult a legal professional for legal decision‑making.\n\n";
+
+const RESPONSES = [
+  {
+    keys: ["what makes you different", "different from other ai", "competitive advantage"],
+    text:
+    "My competitive advantage is that I parse relevant data from verified legal sources, such as state and city databases, to give you tailored and accurate responses.\n\nI am also one of the most secure AI platforms on the market due to cloud security and networking protocol features. Your data is safe with me."
+  },
+  {
+    keys: ["schedule b"],
+    text:
+    "Schedule B typically lists exceptions to title insurance coverage, including recorded easements, liens, covenants, and other matters that affect title unless resolved before closing."
+  },
+  {
+    keys: ["lien"],
+    text:
+    "A lien is a recorded legal claim against a property, often arising from unpaid obligations. Existing liens are usually excluded from coverage unless properly cleared."
+  }
+];
+
+function send() {
+  const q = input.value.trim();
+  if (!q) return;
+
+  addMessage(q, "user");
+  input.value = "";
+
+  const answer = getResponse(q.toLowerCase());
+  typeResponse(DISCLAIMER + answer);
+}
+
+function getResponse(text) {
+  for (const r of RESPONSES) {
+    if (r.keys.some(k => text.includes(k))) {
+      return r.text;
+    }
+  }
+  return "Title insurance is designed to protect against certain defects, liens, or claims that may impact ownership. If you can clarify your question, I can provide a more focused explanation.";
+}
+
+function addMessage(text, role) {
+  const bubble = document.createElement("div");
+  bubble.className = "message " + role;
+  bubble.textContent = text;
+  chat.appendChild(bubble);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function typeResponse(text) {
+  const bubble = document.createElement("div");
+  bubble.className = "message bot";
+  chat.appendChild(bubble);
+
+  let i = 0;
+  const interval = setInterval(() => {
+    bubble.textContent += text.charAt(i);
+    i++;
+    chat.scrollTop = chat.scrollHeight;
+    if (i >= text.length) clearInterval(interval);
+  }, 18);
+}
+</script>
+</body>
+</html>
+    .sidebar h2 {
+      color: var(--gold);
+      letter-spacing: 2px;
+      margin-bottom: 32px;
+      font-weight: 600;
+    }
+
+    .nav-item {
+      color: var(--gold);
+      opacity: 0.85;
+      margin-bottom: 20px;
+      font-size: 15px;
+    }
+
+    /* Main */
+    .main {
+      flex: 1;
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand {
+      font-size: 30px;
+      color: var(--gold);
+      letter-spacing: 2px;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin-bottom: 30px;
+    }
+
+    .chat {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      padding-right: 12%;
+    }
+
+    .message {
+      max-width: 740px;
+      padding: 20px 22px;
+      border-radius: 16px;
+      line-height: 1.55;
+      white-space: pre-wrap;
+    }
+
+    .bot {
+      background:
+        linear-gradient(180deg, #111, #0a0a0a);
+      border: 1px solid var(--gold-glow);
+      box-shadow: 0 0 40px rgba(214,178,94,0.06);
+    }
+
+    .user {
+      align-self: flex-end;
+      background: rgba(214,178,94,0.1);
+      border: 1px solid rgba(214,178,94,0.35);
+    }
+
+    .input-bar {
+      display: flex;
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .input-bar input {
+      flex: 1;
+      background: #090909;
       border: 
