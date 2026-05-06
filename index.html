@@ -2,310 +2,254 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>AthenaAI — Title Insurance Assistant</title>
+  <title>AthenaAI — Investor Demo (V2)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <style>
     :root {
-      --bg: #050505;
-      --panel: #0e0e0e;
-      --gold: #d6b25e;
-      --gold-glow: rgba(214, 178, 94, 0.18);
-      --text: #f6f6f6;
-      --muted: #9a9a9a;
+      --bg:#020202;
+      --panel:#0b0b0b;
+      --gold:#d8b45a;
+      --goldGlow:rgba(216,180,90,.25);
+      --text:#f5f5f5;
+      --muted:#9a9a9a;
     }
 
-    * { box-sizing: border-box; }
+    * { box-sizing:border-box; }
 
     body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, sans-serif;
-      background:
-        radial-gradient(circle at top left, #141414, #000);
-      color: var(--text);
-      display: flex;
-      height: 100vh;
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,sans-serif;
+      background:radial-gradient(circle at top left,#181818,#000);
+      color:var(--text);
+      display:flex;
+      height:100vh;
+      overflow:hidden;
     }
 
-    /* Sidebar */
-    .sidebar {
-      width: 230px;
-      background: linear-gradient(180deg, #0b0b0b, #030303);
-      padding: 28px 22px;
-      border-right: 1px solid var(--gold-glow);
+    aside {
+      width:250px;
+      padding:30px 26px;
+      background:linear-gradient(180deg,#0c0c0c,#030303);
+      border-right:1px solid var(--goldGlow);
     }
 
-    .sidebar h2 {
-      color: var(--gold);
-      letter-spacing: 2px;
-      margin-bottom: 32px;
-      font-weight: 600;
+    aside h2 {
+      color:var(--gold);
+      letter-spacing:3px;
+      margin-bottom:36px;
+      font-weight:600;
     }
 
-    .nav-item {
-      color: var(--gold);
-      opacity: 0.85;
-      margin-bottom: 20px;
-      font-size: 15px;
+    .nav {
+      color:var(--gold);
+      opacity:.85;
+      margin:20px 0;
+      font-size:15px;
     }
 
-    /* Main */
-    .main {
-      flex: 1;
-      padding: 36px;
-      display: flex;
-      flex-direction: column;
+    main {
+      flex:1;
+      padding:40px;
+      display:flex;
+      flex-direction:column;
     }
 
     .brand {
-      font-size: 30px;
-      color: var(--gold);
-      letter-spacing: 2px;
-      margin-bottom: 4px;
+      font-size:32px;
+      letter-spacing:2px;
+      color:var(--gold);
     }
 
     .subtitle {
-      color: var(--muted);
-      margin-bottom: 30px;
+      color:var(--muted);
+      max-width:720px;
+      margin:8px 0 32px;
     }
 
     .chat {
-      flex: 1;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
-      padding-right: 12%;
+      flex:1;
+      overflow-y:auto;
+      display:flex;
+      flex-direction:column;
+      gap:22px;
+      padding-right:14%;
     }
 
-    .message {
-      max-width: 740px;
-      padding: 20px 22px;
-      border-radius: 16px;
-      line-height: 1.55;
-      white-space: pre-wrap;
+    .msg {
+      max-width:780px;
+      padding:22px 26px;
+      border-radius:18px;
+      line-height:1.6;
+      white-space:pre-wrap;
     }
 
     .bot {
-      background:
-        linear-gradient(180deg, #111, #0a0a0a);
-      border: 1px solid var(--gold-glow);
-      box-shadow: 0 0 40px rgba(214,178,94,0.06);
+      background:linear-gradient(180deg,#121212,#0a0a0a);
+      border:1px solid var(--goldGlow);
+      box-shadow:0 0 42px rgba(216,180,90,.08);
     }
 
     .user {
-      align-self: flex-end;
-      background: rgba(214,178,94,0.1);
-      border: 1px solid rgba(214,178,94,0.35);
+      align-self:flex-end;
+      background:rgba(216,180,90,.12);
+      border:1px solid rgba(216,180,90,.45);
     }
 
-    .input-bar {
-      display: flex;
-      gap: 14px;
-      margin-top: 22px;
+    .input {
+      display:flex;
+      gap:14px;
+      margin-top:24px;
     }
 
-    .input-bar input {
-      flex: 1;
-      background: #090909;
-      border: 1px solid var(--gold-glow);
-      border-radius: 14px;
-      padding: 15px 18px;
-      color: var(--text);
-      font-size: 16px;
+    .input input {
+      flex:1;
+      background:#080808;
+      border:1px solid var(--goldGlow);
+      border-radius:16px;
+      padding:16px 18px;
+      color:var(--text);
+      font-size:16px;
     }
 
-    .input-bar button {
-      background: linear-gradient(180deg, #e6c873, #caa14c);
-      border: none;
-      border-radius: 14px;
-      padding: 0 26px;
-      font-size: 18px;
-      cursor: pointer;
-      color: #000;
+    .input button {
+      background:linear-gradient(180deg,#f0d88a,#c79d45);
+      color:#000;
+      border:none;
+      border-radius:16px;
+      padding:0 30px;
+      font-size:18px;
+      cursor:pointer;
     }
 
     footer {
-      margin-top: 14px;
-      font-size: 12px;
-      color: #777;
+      font-size:12px;
+      color:#777;
+      margin-top:14px;
     }
   </style>
 </head>
 
 <body>
-  <aside class="sidebar">
+  <aside>
     <h2>ATHENA</h2>
-    <div class="nav-item">Browse</div>
-    <div class="nav-item">Secure</div>
-    <div class="nav-item">Title Insights</div>
-    <div class="nav-item">Risk Analysis</div>
-    <div class="nav-item">Reports</div>
+    <div class="nav">Overview</div>
+    <div class="nav">Security & Compliance</div>
+    <div class="nav">Title Intelligence</div>
+    <div class="nav">Risk Analysis</div>
+    <div class="nav">Roadmap</div>
   </aside>
 
-  <main class="main">
+  <main>
     <div class="brand">🦉 ATHENA</div>
-    <div class="subtitle">Secure, focused intelligence for title insurance clarity.</div>
+    <div class="subtitle">
+      Investor prototype demonstrating a secure, domain‑specialized AI focused on
+      title insurance and legally‑aware insights.
+    </div>
 
     <section class="chat" id="chat">
-      <div class="message bot">
+      <div class="msg bot">
 Consult a legal professional for legal decision‑making.
 
 Hello, I’m AthenaAI.
-What insight can I provide regarding title insurance, risk, or coverage?
+I provide secure, focused intelligence for understanding title insurance, risk, and coverage.
+What would you like to explore?
       </div>
     </section>
 
-    <div class="input-bar">
-      <input id="input" placeholder="Enter a question…" />
+    <div class="input">
+      <input id="q" placeholder="Ask Athena a question…" />
       <button onclick="send()">→</button>
     </div>
 
     <footer>
-      Prototype demonstration only. Not legal advice.
+      V2 prototype for investor demonstration only. Not legal advice.
     </footer>
   </main>
 
 <script>
 const chat = document.getElementById('chat');
-const input = document.getElementById('input');
+const q = document.getElementById('q');
 
 const DISCLAIMER =
 "Consult a legal professional for legal decision‑making.\n\n";
 
 const RESPONSES = [
   {
+    // DEMO-SPECIFIC INVESTOR RESPONSE
+    keys: ["special"],
+    text:
+`My services can be boiled down to three main things: saving time, reducing risk, and helping businesses scale.
+
+By automating compliance tasks and centralizing information, I can minimize the time it takes to complete transactions. My services can also reduce the chance of human error by providing accurate, up‑to‑date information and guiding users through the process. This is especially important in an industry where mistakes can be expensive and lead to legal issues.
+
+On top of that, I can help improve overall efficiency by simplifying communication and reducing the need for multiple touchpoints. Faster processing benefits both the business and its clients, leading to a better overall experience.
+
+In short, I am here to help you work smarter, not harder, while staying compliant and competitive.`
+  },
+  {
     keys: ["what makes you different", "different from other ai", "competitive advantage"],
     text:
-    "My competitive advantage is that I parse relevant data from verified legal sources, such as state and city databases, to give you tailored and accurate responses.\n\nI am also one of the most secure AI platforms on the market due to cloud security and networking protocol features. Your data is safe with me."
+`My competitive advantage is i parse relevant data from verified legal sources such as state and city databases to give you tailored accurate responses.
+
+I also am the most secure AI on the market due to my cloud security and networking protocoling features. Your data is safe with me.`
+  },
+  {
+    keys: ["security", "secure", "data"],
+    text:
+"AthenaAI is designed around enterprise‑grade cloud security principles, emphasizing encrypted data transport, isolation by design, and controlled networking protocols to protect sensitive information."
   },
   {
     keys: ["schedule b"],
     text:
-    "Schedule B typically lists exceptions to title insurance coverage, including recorded easements, liens, covenants, and other matters that affect title unless resolved before closing."
+"Schedule B of a title commitment outlines exceptions to coverage, including recorded easements, liens, covenants, and other matters affecting title unless resolved prior to closing."
   },
   {
     keys: ["lien"],
     text:
-    "A lien is a recorded legal claim against a property, often arising from unpaid obligations. Existing liens are usually excluded from coverage unless properly cleared."
+"A lien is a recorded legal claim against a property for unpaid obligations. Existing liens are generally excluded from coverage unless satisfied or otherwise insured over."
   }
 ];
 
 function send() {
-  const q = input.value.trim();
-  if (!q) return;
+  const text = q.value.trim();
+  if (!text) return;
 
-  addMessage(q, "user");
-  input.value = "";
+  add(text, "user");
+  q.value = "";
 
-  const answer = getResponse(q.toLowerCase());
-  typeResponse(DISCLAIMER + answer);
+  const answer = getAnswer(text.toLowerCase());
+  type(DISCLAIMER + answer);
 }
 
-function getResponse(text) {
+function getAnswer(t) {
   for (const r of RESPONSES) {
-    if (r.keys.some(k => text.includes(k))) {
-      return r.text;
-    }
+    if (r.keys.some(k => t.includes(k))) return r.text;
   }
-  return "Title insurance is designed to protect against certain defects, liens, or claims that may impact ownership. If you can clarify your question, I can provide a more focused explanation.";
+  return "AthenaAI focuses on legally‑aware interpretation of trusted public information sources, with an emphasis on risk, coverage clarity, and data security.";
 }
 
-function addMessage(text, role) {
-  const bubble = document.createElement("div");
-  bubble.className = "message " + role;
-  bubble.textContent = text;
-  chat.appendChild(bubble);
+function add(text, role) {
+  const d = document.createElement("div");
+  d.className = "msg " + role;
+  d.textContent = text;
+  chat.appendChild(d);
   chat.scrollTop = chat.scrollHeight;
 }
 
-function typeResponse(text) {
-  const bubble = document.createElement("div");
-  bubble.className = "message bot";
-  chat.appendChild(bubble);
+function type(text) {
+  const d = document.createElement("div");
+  d.className = "msg bot";
+  chat.appendChild(d);
 
   let i = 0;
-  const interval = setInterval(() => {
-    bubble.textContent += text.charAt(i);
-    i++;
+  const iv = setInterval(() => {
+    d.textContent += text[i++];
     chat.scrollTop = chat.scrollHeight;
-    if (i >= text.length) clearInterval(interval);
+    if (i >= text.length) clearInterval(iv);
   }, 18);
 }
 </script>
+
 </body>
 </html>
-    .sidebar h2 {
-      color: var(--gold);
-      letter-spacing: 2px;
-      margin-bottom: 32px;
-      font-weight: 600;
-    }
-
-    .nav-item {
-      color: var(--gold);
-      opacity: 0.85;
-      margin-bottom: 20px;
-      font-size: 15px;
-    }
-
-    /* Main */
-    .main {
-      flex: 1;
-      padding: 36px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .brand {
-      font-size: 30px;
-      color: var(--gold);
-      letter-spacing: 2px;
-      margin-bottom: 4px;
-    }
-
-    .subtitle {
-      color: var(--muted);
-      margin-bottom: 30px;
-    }
-
-    .chat {
-      flex: 1;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
-      padding-right: 12%;
-    }
-
-    .message {
-      max-width: 740px;
-      padding: 20px 22px;
-      border-radius: 16px;
-      line-height: 1.55;
-      white-space: pre-wrap;
-    }
-
-    .bot {
-      background:
-        linear-gradient(180deg, #111, #0a0a0a);
-      border: 1px solid var(--gold-glow);
-      box-shadow: 0 0 40px rgba(214,178,94,0.06);
-    }
-
-    .user {
-      align-self: flex-end;
-      background: rgba(214,178,94,0.1);
-      border: 1px solid rgba(214,178,94,0.35);
-    }
-
-    .input-bar {
-      display: flex;
-      gap: 14px;
-      margin-top: 22px;
-    }
-
-    .input-bar input {
-      flex: 1;
-      background: #090909;
-      border: 
